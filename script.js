@@ -7,10 +7,10 @@
    CONFIG — edit everything here
    ============================================================ */
 const CONFIG = {
-  herName: "Beautiful",
+  herName: "Shivanshi",
 
   greeting: [
-    "Hey Beautiful! ❤️",
+    "Hey Shivanshi! ❤️",
     "Someone very special was born today, and that deserves a little magic.",
     "Ready for your surprise?"
   ],
@@ -41,7 +41,7 @@ slides: [
 ],
 
   wishMessage: [
-    "Happy Birthday, My Favorite Person! ❤️",
+    "Happy Birthday, Shivanshi ❤️",
     "May your life always be filled with happiness, love, laughter, and beautiful surprises.",
     "Never stop smiling, because your smile makes everything brighter."
   ],
@@ -58,8 +58,8 @@ slides: [
   //   3. If you add birthdayMusic, it takes over from the sweet track the
   //      moment the candle is blown out. It's optional — if you don't add
   //      it, the sweet track just keeps playing, so nothing ever goes silent.
-  sweetBackgroundMusic: "assets/audio/sweet-background.mp3", // OPTIONAL — you haven't added this file yet; see README. Runs start → end, pausing only during the slideshow.
-  slideshowMusic:   "assets/audio/slideshow-music.mp3", // "your song" — plays only during the slideshow
+  sweetBackgroundMusic: "assets/audio/start-music.mp3", // OPTIONAL — you haven't added this file yet; see README. Runs start → end, pausing only during the slideshow.
+  slideshowMusic:   "assets/audio/teri-galliyan-music.mp3", // "your song" — plays only during the slideshow
   birthdayMusic:    "assets/audio/happy-birthday.mp3",  // OPTIONAL — takes over from the sweet track once the candle's blown; if missing, the sweet track just continues
   balloonPopSound:  "assets/audio/balloon-pop.mp3",     // one-shot; not used by default anymore now that balloons float away instead of popping — kept here in case you want to wire it back to something
   candleBlowSound:  "assets/audio/candle-blow.mp3",     // one-shot, plays when the candle is blown out
