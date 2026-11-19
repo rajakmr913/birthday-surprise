@@ -395,25 +395,50 @@ function playSfx(audio) {
    Background preloading — keeps first load light, then quietly
    warms up everything needed for the next screens.
    ============================================================ */
+
 let preloaded = false;
-const preloadedImages = []; // keep references so the browser doesn't discard them
+const preloadedImages = [];
+
+function preloadImage(src, priority = "low") {
+  const img = new Image();
+  img.decoding = "async";
+  img.fetchPriority = priority;
+  img.src = src;
+  preloadedImages.push(img);
+  return img;
+}
 
 function preloadSlides() {
   if (preloaded) return;
   preloaded = true;
-  CONFIG.slides.forEach((s, i) => {
-    // stagger so photos download one after another, not all at once
-    setTimeout(() => {
-      const img = new Image();
-      img.decoding = "async";
-      img.src = s.photo;
-      preloadedImages.push(img);
-    }, i * 400);
+
+  // First three photos: download immediately
+  CONFIG.slides.slice(0, 3).forEach((slide, i) => {
+    preloadImage(slide.photo, i === 0 ? "high" : "auto");
   });
-  // warm up the slideshow song + candle sound
-  audioSlideshow.preload = "auto"; audioSlideshow.load();
-  sfxCandle.preload = "auto";      sfxCandle.load();
-  audioBirthday.preload = "metadata"; audioBirthday.load();
+
+  // Remaining photos: download when browser is idle
+  const loadRemaining = () => {
+    CONFIG.slides.slice(3).forEach(slide => {
+      preloadImage(slide.photo, "low");
+    });
+  };
+
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(loadRemaining);
+  } else {
+    setTimeout(loadRemaining, 500);
+  }
+
+  // Preload audio separately
+  audioSlideshow.preload = "auto";
+  audioSlideshow.load();
+
+  sfxCandle.preload = "auto";
+  sfxCandle.load();
+
+  audioBirthday.preload = "metadata";
+  audioBirthday.load();
 }
 
 /* ============================================================
