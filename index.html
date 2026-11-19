@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Low-priority hint: first slide photo warms up without competing with fonts/CSS -->
+  <link rel="preload" as="image" href="assets/images/photo1.webp" fetchpriority="low" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%88%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
@@ -133,7 +135,7 @@
       <div class="stage">
         <div class="balloon-cluster" id="balloon" role="button" tabindex="0" aria-label="Let the balloons go"></div>
 
-        <button class="glow-btn" id="pop-btn" type="button">LET THEM GO &#127880;</button>
+        <button class="glow-btn tap" id="pop-btn" type="button">LET THEM GO &#127880;</button>
 
         <p class="greeting" id="greeting" hidden>
           <span class="greeting-line">Hey Shivanshi! &#10084;&#65039;</span>
@@ -141,7 +143,7 @@
           <span class="greeting-line">Ready for your surprise?</span>
         </p>
 
-        <button class="glow-btn ghost" id="to-gift-btn" type="button" hidden>NEXT &#127873;</button>
+        <button class="glow-btn ghost tap" id="to-gift-btn" type="button" hidden>NEXT &#127873;</button>
       </div>
     </section>
 
@@ -167,7 +169,7 @@
           <div class="gift-glow"></div>
         </div>
 
-        <button class="glow-btn" id="open-gift-btn" type="button">OPEN ME &#127873;</button>
+        <button class="glow-btn tap" id="open-gift-btn" type="button">OPEN ME &#127873;</button>
       </div>
     </section>
 
@@ -180,7 +182,7 @@
         <div class="slideshow-wrap">
           <svg class="mascot card-buddy" viewBox="0 0 120 130" aria-hidden="true"><use href="#m-chick"/></svg>
           <div class="slideshow-card" id="slide-card">
-            <img id="slide-photo" src="" alt="Birthday memory" />
+            <img id="slide-photo" alt="Birthday memory" decoding="async" />
             <div class="slide-photo-fallback" hidden>&#128247;</div>
             <div class="slide-scrim" aria-hidden="true"></div>
             <div class="slide-caption" id="slide-caption"></div>
@@ -202,7 +204,7 @@
           </button>
         </div>
 
-        <button class="glow-btn" id="to-candle-btn" type="button" hidden>Continue to your wish &#127874;</button>
+        <button class="glow-btn tap" id="to-candle-btn" type="button" hidden>Continue to your wish &#127874;</button>
       </div>
     </section>
 
@@ -253,7 +255,7 @@
               Close your eyes, make your sweetest wish, and blow out the candle.
             </p>
 
-            <button class="glow-btn" id="blow-btn" type="button">BLOW ME &#127875;</button>
+            <button class="glow-btn tap" id="blow-btn" type="button">BLOW ME &#127875;</button>
           </div>
         </div>
 
@@ -263,7 +265,7 @@
           <span class="greeting-line">Never stop smiling, because your smile makes everything brighter.</span>
         </p>
 
-        <button class="glow-btn ghost" id="to-party-btn" type="button" hidden>NEXT &#10084;&#65039;</button>
+        <button class="glow-btn ghost tap" id="to-party-btn" type="button" hidden>NEXT &#10084;&#65039;</button>
       </div>
     </section>
 
@@ -276,10 +278,27 @@
       <div class="stage">
         <h2 class="party-title" id="party-title">Party To Banti Hai! &#127881;&#129321;</h2>
         <div class="party-buttons">
-          <button class="glow-btn yes-btn" id="yes-btn" type="button">✨YES! &#129321;</button>
+          <button class="glow-btn yes-btn tap" id="yes-btn" type="button">✨YES! &#129321;</button>
           <button class="glow-btn no-btn" id="no-btn" type="button">NO🥹 &#128584;</button>
         </div>
         <div class="no-popup" id="no-popup" hidden></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCREEN 5b — WHEN & WHERE (opens after YES)
+    ============================================================ -->
+    <section id="screen-reply" class="screen" aria-label="When and where">
+      <svg class="mascot pos-bl" viewBox="0 0 120 130" aria-hidden="true"><use href="#m-chick"/></svg>
+      <svg class="mascot pos-br" viewBox="0 0 120 130" aria-hidden="true"><use href="#m-penguin"/></svg>
+      <div class="stage">
+        <div class="reply-card">
+          <label class="reply-label" for="reply-text">When and where to come? &#128513;</label>
+          <textarea id="reply-text" rows="5" maxlength="500"
+            placeholder="Write the day, time, place... or anything you like &#128172;"></textarea>
+          <p class="reply-error" id="reply-error" hidden>write here &#129402;</p>
+        </div>
+        <button class="glow-btn tap" id="send-btn" type="button">Send &#128140;</button>
       </div>
     </section>
 
@@ -292,29 +311,29 @@
           <svg class="mascot row-1" viewBox="0 0 120 130" aria-hidden="true"><use href="#m-cat"/></svg><svg class="mascot row-2" viewBox="0 0 120 130" aria-hidden="true"><use href="#m-bear"/></svg><svg class="mascot row-3" viewBox="0 0 120 130" aria-hidden="true"><use href="#m-bunny"/></svg><svg class="mascot row-4" viewBox="0 0 120 130" aria-hidden="true"><use href="#m-panda"/></svg><svg class="mascot row-5" viewBox="0 0 120 130" aria-hidden="true"><use href="#m-penguin"/></svg><svg class="mascot row-6" viewBox="0 0 120 130" aria-hidden="true"><use href="#m-chick"/></svg>
         </div>
         <h2 class="thanks-title">YAYYYY! &#129321;&#10084;&#65039;</h2>
-            <p class="thanks-message">
-  <span class="greeting-line">Okay... now that you said yes, there's no going back. 🤭❤️</span>
-  <span class="greeting-line">Bas ab ek cute si smile toh banti hai. 🥰</span>
-  <span class="greeting-line">And I hope this little surprise made you feel as special as you really are. ✨❤️</span>
-</p>
+        <p class="thanks-message">
+          <span class="greeting-line">Okay... now that you said yes, there's no going back. 🤭❤️</span>
+          <span class="greeting-line">Bas ab ek cute si smile toh banti hai. 🥰</span>
+          <span class="greeting-line">And I hope this little surprise made you feel as special as you really are. ✨❤️</span>
+        </p>
         <div class="email-status" id="email-status" hidden></div>
-        <button class="glow-btn ghost" id="restart-btn" type="button">Relive the magic &#10024;</button>
+        <button class="glow-btn ghost tap" id="restart-btn" type="button">Relive the magic &#10024;</button>
       </div>
     </section>
 
   </div><!-- /shake-wrap -->
 
   <!-- ===== Audio elements =====
-       No src here on purpose: script.js sets each element's source from
-       CONFIG on load, so CONFIG is the one place you ever need to edit
-       filenames or add your own tracks. See README for the full map. -->
-  <audio id="audio-sweet" loop preload="auto"></audio>
-  <audio id="audio-slideshow" loop preload="auto"></audio>
-  <audio id="audio-birthday" loop preload="auto"></audio>
-  <audio id="sfx-balloon" preload="auto"></audio>
-  <audio id="sfx-candle" preload="auto"></audio>
-  <audio id="sfx-popper" preload="auto"></audio>
+       No src here on purpose: script.js sets each source from CONFIG.
+       preload is kept light so audio never competes with the photos on
+       first load; script.js warms the next tracks up in the background. -->
+  <audio id="audio-sweet" loop preload="metadata"></audio>
+  <audio id="audio-slideshow" loop preload="none"></audio>
+  <audio id="audio-birthday" loop preload="none"></audio>
+  <audio id="sfx-balloon" preload="none"></audio>
+  <audio id="sfx-candle" preload="none"></audio>
+  <audio id="sfx-popper" preload="metadata"></audio>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
