@@ -16,29 +16,30 @@ const CONFIG = {
   ],
 
   // Slideshow: each slide = { photo, caption }
-  // Replace photo paths with your own files in assets/images/
-slides: [
-  {
-    photo: "assets/images/photo1.png",
-    caption: "You probably don't realize it, but there's something really special about you. ❤️"
-  },
-  {
-    photo: "assets/images/photo2.png",
-    caption: "I hope you always remember that you're doing better than you think. Be a little kinder to yourself. 🥰"
-  },
-  {
-    photo: "assets/images/photo3.png",
-    caption: "On the days when everything feels a little too much, I hope you know that you don't have to handle everything alone. 🤍"
-  },
-  {
-    photo: "assets/images/photo4.png",
-    caption: "You deserve the same happiness, kindness, and love that you so effortlessly bring into other people's lives. ✨"
-  },
- {
-  photo: "assets/images/photo5.jpg",
-  caption: "So today, forget all the worries for a while... just smile and enjoy your day. And if I get to be a small part of your happiness, that's something I'll always cherish. ❤️✨"
-}
-],
+  // Photos are WebP (much smaller than PNG/JPG). If a .webp is missing, the
+  // loader automatically tries .png / .jpg / .jpeg with the same name.
+  slides: [
+    {
+      photo: "assets/images/photo1.webp",
+      caption: "You probably don't realize it, but there's something really special about you. ❤️"
+    },
+    {
+      photo: "assets/images/photo2.webp",
+      caption: "I hope you always remember that you're doing better than you think. Be a little kinder to yourself. 🥰"
+    },
+    {
+      photo: "assets/images/photo3.webp",
+      caption: "On the days when everything feels a little too much, I hope you know that you don't have to handle everything alone. 🤍"
+    },
+    {
+      photo: "assets/images/photo4.webp",
+      caption: "You deserve the same happiness, kindness, and love that you so effortlessly bring into other people's lives. ✨"
+    },
+    {
+      photo: "assets/images/photo5.webp",
+      caption: "So today, forget all the worries for a while... just smile and enjoy your day. And if I get to be a small part of your happiness, that's something I'll always cherish. ❤️✨"
+    }
+  ],
 
   wishMessage: [
     "Happy Birthday, Shivanshi ❤️",
@@ -46,9 +47,7 @@ slides: [
     "Never stop smiling, because your smile makes everything brighter."
   ],
 
-  // Every filename below lives in one place — this object. Nothing else in
-  // index.html or script.js hardcodes an audio path, so renaming a file or
-  // swapping in your own track only ever means editing the line here.
+  // Every filename below lives in one place — this object.
   //
   // Background music has three layers that hand off to one another:
   //   1. sweetBackgroundMusic plays from the very first click through to the
@@ -56,47 +55,41 @@ slides: [
   //   2. ...EXCEPT during the photo slideshow, where it pauses and
   //      slideshowMusic ("your song") takes over instead.
   //   3. If you add birthdayMusic, it takes over from the sweet track the
-  //      moment the candle is blown out. It's optional — if you don't add
-  //      it, the sweet track just keeps playing, so nothing ever goes silent.
-  sweetBackgroundMusic: "assets/audio/start-music.mp3", // OPTIONAL — you haven't added this file yet; see README. Runs start → end, pausing only during the slideshow.
+  //      moment the candle is blown out. It's optional.
+  sweetBackgroundMusic: "assets/audio/start-music.mp3", // OPTIONAL — falls back to a built-in music box if missing
   slideshowMusic:   "assets/audio/teri-galliyan-music.mp3", // "your song" — plays only during the slideshow
-  birthdayMusic:    "assets/audio/happy-birthday.mp3",  // OPTIONAL — takes over from the sweet track once the candle's blown; if missing, the sweet track just continues
-  balloonPopSound:  "assets/audio/balloon-pop.mp3",     // one-shot; not used by default anymore now that balloons float away instead of popping — kept here in case you want to wire it back to something
+  birthdayMusic:    "assets/audio/happy-birthday.mp3",  // OPTIONAL
+  balloonPopSound:  "assets/audio/balloon-pop.mp3",     // one-shot; not used by default
   candleBlowSound:  "assets/audio/candle-blow.mp3",     // one-shot, plays when the candle is blown out
-  partyPopperSound: "assets/audio/party-popper.mp3",    // one-shot, plays when the gift opens and again when she taps YES
+  partyPopperSound: "assets/audio/party-popper.mp3",    // one-shot, gift opening and YES
 
-  // Relative volume (0 = silent, 1 = full). Music defaults to 30% so it sits
-  // softly behind everything rather than overpowering it; sfx a bit higher
-  // so pops/chimes still read clearly.
+  // Relative volume (0 = silent, 1 = full).
   volumes: {
     music: 0.3,
     sfx: 0.75
   },
 
-  // Words shown on the balloons before they're released — a little "let go of
-  // your worries" moment. Edit freely, or set to [] to turn this off (balloons
-  // just show hearts/plain color instead).
+  // Words shown on the balloons before they're released. Set to [] to turn off.
   balloonWords: [
     "Depression", "Assignments", "Exams", "Anxiety", "Loneliness", "Sadness",
     "Stress", "Overthinking", "Pressure", "Deadlines", "Tension", "Worries",
     "Fear", "Bad Days", "Tiredness", "Problems"
   ],
 
-  // Cartoon stickers YOU add (transparent PNG/WebP work best). Put the files in
-  // assets/stickers/ and list them here — they float around every screen, e.g.
-  //   stickers: ["assets/stickers/one.png", "assets/stickers/two.png"],
-  // Leave empty for none. (The built-in cartoon cast is drawn in index.html.)
+  // Optional transparent PNG/WebP stickers in assets/stickers/.
   stickers: [],
 
   slideDuration: 10000, // 10 seconds per slide
 
-  // Email confirmation (EmailJS). See setup instructions.
-email: {
-  enabled: true,
-  serviceID: "service_w6gm823",
-  templateID: "template_wsyu1ri",
-  publicKey: "2xHicCEGtl6ARevcn"
-}
+  // Email confirmation (EmailJS).
+  // Tip: in the EmailJS dashboard, restrict allowed domains to your site,
+  // and add {{reply_message}} to your template body to receive her reply.
+  email: {
+    enabled: true,
+    serviceID: "service_w6gm823",
+    templateID: "template_wsyu1ri",
+    publicKey: "2xHicCEGtl6ARevcn"
+  }
 };
 
 /* ============================================================
@@ -267,8 +260,6 @@ function animateConfetti() {
      'sweet'    — the ambient track, start to end, except during the slideshow
      'their'    — the slideshow's own song ("your song"), slideshow only
      'birthday' — optional, takes over once the candle is blown
-   `activeTrack` tracks which one is currently meant to be playing so that
-   tab-visibility changes know what to resume.
    ============================================================ */
 const audioSweet = $("audio-sweet");
 const audioSlideshow = $("audio-slideshow");
@@ -277,9 +268,6 @@ const sfxBalloon = $("sfx-balloon");
 const sfxCandle = $("sfx-candle");
 const sfxPopper = $("sfx-popper");
 
-// Apply CONFIG as the single source of truth for sources + volumes.
-// If a file 404s, the element simply stays silent (caught below) instead
-// of breaking anything else on the page.
 audioSweet.src = CONFIG.sweetBackgroundMusic;
 audioSlideshow.src = CONFIG.slideshowMusic;
 audioBirthday.src = CONFIG.birthdayMusic;
@@ -294,20 +282,17 @@ let activeTrack = null; // 'sweet' | 'their' | 'birthday' | null
 
 /* ------------------------------------------------------------
    Built-in "sweet" music box (original, generated with Web Audio).
-   Used automatically when CONFIG.sweetBackgroundMusic can't be loaded,
-   so the sweet background layer works out of the box. Drop your own
-   mp3 at that path and it replaces this seamlessly.
+   Used automatically when CONFIG.sweetBackgroundMusic can't be loaded.
    ------------------------------------------------------------ */
 const musicBox = (() => {
-  // Gentle I–V–vi–IV progression in C, played as a soft arpeggio.
   const chords = [
     [261.63, 329.63, 392.0, 523.25],   // C
     [196.0, 293.66, 392.0, 493.88],    // G
     [220.0, 261.63, 329.63, 440.0],    // Am
     [174.61, 261.63, 349.23, 440.0]    // F
   ];
-  const pattern = [0, 1, 2, 3, 2, 1, 2, 1]; // 8 eighth-notes per bar
-  const eighth = 0.36;                      // seconds (~83 bpm)
+  const pattern = [0, 1, 2, 3, 2, 1, 2, 1];
+  const eighth = 0.36;
   let ctx = null, master = null, timer = null, running = false;
   let nextTime = 0, bar = 0, beat = 0;
 
@@ -317,7 +302,6 @@ const musicBox = (() => {
     ctx = new AC();
     master = ctx.createGain();
     master.gain.value = 0;
-    // A touch of echo makes it feel airy and dreamy
     const delay = ctx.createDelay(1.0);
     delay.delayTime.value = eighth * 1.5;
     const fb = ctx.createGain(); fb.gain.value = 0.32;
@@ -345,7 +329,7 @@ const musicBox = (() => {
     while (nextTime < ctx.currentTime + 0.5) {
       const chord = chords[bar % chords.length];
       note(chord[pattern[beat]], nextTime, 1.3, 0.5);
-      if (beat === 0) note(chord[3] * 2, nextTime, 2.4, 0.22); // high bell on the downbeat
+      if (beat === 0) note(chord[3] * 2, nextTime, 2.4, 0.22);
       nextTime += eighth;
       if (++beat >= pattern.length) { beat = 0; bar++; }
     }
@@ -408,6 +392,31 @@ function playSfx(audio) {
 }
 
 /* ============================================================
+   Background preloading — keeps first load light, then quietly
+   warms up everything needed for the next screens.
+   ============================================================ */
+let preloaded = false;
+const preloadedImages = []; // keep references so the browser doesn't discard them
+
+function preloadSlides() {
+  if (preloaded) return;
+  preloaded = true;
+  CONFIG.slides.forEach((s, i) => {
+    // stagger so photos download one after another, not all at once
+    setTimeout(() => {
+      const img = new Image();
+      img.decoding = "async";
+      img.src = s.photo;
+      preloadedImages.push(img);
+    }, i * 400);
+  });
+  // warm up the slideshow song + candle sound
+  audioSlideshow.preload = "auto"; audioSlideshow.load();
+  sfxCandle.preload = "auto";      sfxCandle.load();
+  audioBirthday.preload = "metadata"; audioBirthday.load();
+}
+
+/* ============================================================
    Balloons — a bouquet to release, a sky full of them, and a
    steady drift of balloons through the background everywhere
    ============================================================ */
@@ -416,8 +425,7 @@ const balloonsLayer = $("balloons-layer");
 const rand = (a, b) => a + Math.random() * (b - a);
 let skyBalloonCount = 0;
 
-// Shuffled-bag picker: hands out every word once (in random order) before
-// any word repeats, so the 12-balloon bouquet never shows a duplicate.
+// Shuffled-bag picker: every word once before any repeats.
 const nextBalloonWord = (() => {
   let bag = [];
   return () => {
@@ -452,7 +460,7 @@ function spawnSkyBalloon({ w = rand(34, 60), dur = rand(14, 24), delay = 0, opac
   skyBalloonCount++;
 }
 
-// "So many": a big wave of balloons fills the sky when the bouquet is let go.
+// A big wave of balloons fills the sky when the bouquet is let go.
 function balloonFlood(n = 44) {
   for (let i = 0; i < n; i++) {
     spawnSkyBalloon({
@@ -496,13 +504,10 @@ const BOUQUET = [
 
 function buildBouquet() {
   balloon.innerHTML = "";
-  // The bouquet gets its own shuffled set so its 12 balloons never repeat a
-  // word, independent of whatever the ambient/flood balloons are drawing.
   const bouquetWords = CONFIG.balloonWords && CONFIG.balloonWords.length
     ? [...CONFIG.balloonWords].sort(() => Math.random() - 0.5)
     : [];
   const NS = "http://www.w3.org/2000/svg";
-  // Strings run from each balloon's knot to the shared tie point.
   const strings = document.createElementNS(NS, "svg");
   strings.setAttribute("class", "bq-strings");
   strings.setAttribute("viewBox", "0 0 100 100");
@@ -537,7 +542,6 @@ function buildBouquet() {
     balloon.appendChild(b);
   });
 
-  // A little bow where the strings meet.
   const bow = document.createElementNS(NS, "svg");
   bow.setAttribute("class", "bq-bow");
   bow.setAttribute("viewBox", "0 0 100 100");
@@ -556,8 +560,6 @@ function releaseBalloons() {
   balloon.classList.add("released");
   popBtn.classList.add("vanish");
   setTimeout(() => { popBtn.hidden = true; }, 450);
-  // The sweet background track begins right here — its arrival IS the sound
-  // of this moment, so no separate release sfx is needed.
   playSweetMusic();
   balloonFlood(44);
   burstHearts(10);
@@ -566,7 +568,8 @@ function releaseBalloons() {
     greeting.hidden = false;
     toGiftBtn.hidden = false;
   }, 1300);
-  // Once the bouquet has flown off, fold its space away so the greeting sits nicely.
+  // Start downloading photos + songs in the background for the next screens.
+  setTimeout(preloadSlides, 800);
   setTimeout(() => balloon.classList.add("gone"), 3400);
 }
 
@@ -588,9 +591,9 @@ let giftOpened = false;
 function openGift() {
   if (giftOpened) return;
   giftOpened = true;
+  preloadSlides(); // safety net if she somehow got here without the preload
   gift.classList.add("opening");
   playSfx(sfxPopper);
-  // Emit sparkles from the box center
   const rect = gift.getBoundingClientRect();
   launchConfetti(80, rect.left + rect.width / 2);
   setTimeout(() => {
@@ -657,31 +660,37 @@ function showSlide(index, instant = false) {
     renderSlide(slide);
   }
 
-  // Counter
   slideCounter.textContent = `${index + 1} / ${CONFIG.slides.length}`;
-
-  // Dots
   [...slideDots.children].forEach((d, i) => d.classList.toggle("active", i === index));
-
-  // Nav button states
   prevBtn.disabled = index === 0;
   nextBtn.disabled = index === CONFIG.slides.length - 1;
 
-  // Reset timer (only auto-advance if user hasn't interacted OR always continue)
   resetSlideTimer();
 
-  // Show "continue" button on last slide
   if (index === CONFIG.slides.length - 1) {
     setTimeout(() => { toCandleBtn.hidden = false; }, 800);
   } else {
     toCandleBtn.hidden = true;
   }
+
+  // Warm up the next photo so the next flip is instant
+  const nxt = CONFIG.slides[index + 1];
+  if (nxt) { const i = new Image(); i.decoding = "async"; i.src = nxt.photo; }
 }
+
+// If a .webp isn't there (not converted yet), quietly try the old extensions.
+const FALLBACK_EXTS = [".png", ".jpg", ".jpeg"];
 
 function renderSlide(slide) {
   slideCaption.classList.remove("show");
   slidePhoto.style.opacity = 0;
+  let fallbackIdx = 0;
+
   slidePhoto.onerror = () => {
+    if (fallbackIdx < FALLBACK_EXTS.length) {
+      slidePhoto.src = slide.photo.replace(/\.[a-z0-9]+$/i, FALLBACK_EXTS[fallbackIdx++]);
+      return;
+    }
     slidePhoto.hidden = true;
     slideFallback.hidden = false;
     // Photo missing/misnamed? The message must still appear on every slide.
@@ -720,8 +729,6 @@ nextBtn.addEventListener("click", () => {
 });
 
 toCandleBtn.addEventListener("click", () => {
-  // Hand off from "your song" back to the sweet ambient track as we leave
-  // the slideshow.
   audioSlideshow.pause();
   audioSlideshow.currentTime = 0;
   musicPlaying = false;
@@ -737,7 +744,6 @@ function tryStartMusic() {
     musicPlaying = true;
     updateMusicButton(true);
   }).catch(() => {
-    // Autoplay blocked — show tap-to-play
     updateMusicButton(false);
   });
 }
@@ -782,20 +788,15 @@ let candleBlown = false;
 function blowCandle() {
   if (candleBlown) return;
   candleBlown = true;
-  // Only the flame goes out — the candle and the cake stay right where they are.
   flame.classList.add("out");
   candle.classList.add("blown");
-  // The "make a wish" prompt and BLOW ME have done their job: fold them away.
   wishBlock.classList.add("gone");
   setTimeout(() => { wishBlock.hidden = true; }, 850);
   smoke.hidden = false;
   smoke.classList.add("rising");
   setTimeout(() => { smoke.hidden = true; smoke.classList.remove("rising"); }, 1800);
 
-  // Hand off from the sweet ambient track to the birthday song. The birthday
-  // track is optional (see CONFIG.birthdayMusic) — if it isn't there or
-  // can't play, the sweet track (already playing since we left the
-  // slideshow) simply continues rather than cutting to silence.
+  // Hand off from the sweet track to the birthday song (optional file).
   audioBirthday.currentTime = 0;
   audioBirthday.play().then(() => {
     sweet.stop();
@@ -805,11 +806,9 @@ function blowCandle() {
     sweet.play();
   });
 
-  // Confetti + sound
   launchConfetti(160);
   playSfx(sfxCandle);
 
-  // Reveal wish message
   setTimeout(() => {
     wishMessage.hidden = false;
     toPartyBtn.hidden = false;
@@ -861,7 +860,6 @@ function showNoPopup() {
   const msg = noMessages[Math.floor(Math.random() * noMessages.length)];
   noPopup.textContent = msg;
   noPopup.hidden = false;
-  // force reflow then show
   void noPopup.offsetWidth;
   noPopup.classList.add("show");
   if (noPopupTimer) clearTimeout(noPopupTimer);
@@ -885,17 +883,44 @@ noBtn.addEventListener("click", (e) => {
   showNoPopup();
 });
 
+// YES → confetti → "when and where" screen (the email is sent after SEND)
 yesBtn.addEventListener("click", () => {
   launchConfetti(220);
   playSfx(sfxPopper);
-  sendConfirmationEmail();
-  setTimeout(() => showScreen("screen-thanks"), 600);
+  setTimeout(() => {
+    showScreen("screen-reply");
+    // focus the text box once the screen has animated in
+    setTimeout(() => { replyText.focus({ preventScroll: true }); }, 900);
+  }, 600);
 });
+
+/* ============================================================
+   SCREEN 5b — When & where (text box + Send)
+   ============================================================ */
+const replyText = $("reply-text");
+const replyError = $("reply-error");
+const sendBtn = $("send-btn");
+
+sendBtn.addEventListener("click", () => {
+  const msg = replyText.value.trim();
+  if (!msg) {
+    replyError.hidden = false;
+    replyText.focus();
+    return;
+  }
+  replyError.hidden = true;
+  sendBtn.disabled = true;
+  sendConfirmationEmail(msg);   // runs in the background
+  launchConfetti(140);
+  playSfx(sfxPopper);
+  setTimeout(() => showScreen("screen-thanks"), 500);
+});
+replyText.addEventListener("input", () => { replyError.hidden = true; });
 
 /* ============================================================
    Email confirmation via EmailJS
    ============================================================ */
-async function sendConfirmationEmail() {
+async function sendConfirmationEmail(userMessage = "") {
   if (!CONFIG.email.enabled) return;
 
   try {
@@ -908,7 +933,10 @@ async function sendConfirmationEmail() {
     const params = {
       to_email: "anujkumr08112022@gmail.com",
       subject: "Birthday Confirmation",
-      message: "She clicked YES! The birthday party is confirmed! 🥳❤️",
+      // "message" is already in your EmailJS template, so her text is now
+      // included here and shows up in the email with no template change.
+      message: "She clicked YES! The birthday party is confirmed! 🥳❤️\n\nHer reply (when & where):\n" + userMessage,
+      reply_message: userMessage,   // also available as {{reply_message}} if you want it separately
       response: "YES",
       date_time: new Date().toLocaleString()
     };
@@ -936,7 +964,6 @@ function loadScript(src) {
    SCREEN 6 — Thank you / restart
    ============================================================ */
 $("restart-btn").addEventListener("click", () => {
-  // Reset all state
   stopAllMusic();
   balloonsReleased = false;
   giftOpened = false;
@@ -961,11 +988,14 @@ $("restart-btn").addEventListener("click", () => {
   noBtn.style.left = "";
   noBtn.style.top = "";
   $("email-status").hidden = true;
+  replyText.value = "";
+  replyError.hidden = true;
+  sendBtn.disabled = false;
   showScreen("screen-balloon");
 });
 
 /* ============================================================
-   Prevent accidental double-trigger of audio
+   Pause/resume audio when the tab is hidden/shown
    ============================================================ */
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
@@ -997,7 +1027,7 @@ document.addEventListener("visibilitychange", () => {
     img.alt = "";
     img.src = src;
     Object.assign(img.style, spots[i % spots.length], { animationDelay: -(i * 0.7) + "s" });
-    img.onerror = () => img.remove(); // wrong path? just skip it
+    img.onerror = () => img.remove();
     layer.appendChild(img);
   });
 })();
