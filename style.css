@@ -166,8 +166,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: clamp(16px, 4vw, 48px);
   overflow-x: hidden; overflow-y: auto;
 }
-/* Keyframes (not transitions) so the *entering* screen animates too —
-   transitions can't run on an element that's just switched from display:none. */
 .screen.active { display: flex; animation: screenIn 0.85s var(--spring) both; }
 .screen.exit { animation: screenOut 0.7s var(--ease) both; }
 @keyframes screenIn {
@@ -223,7 +221,27 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   opacity: 0; transform: scale(0.5) !important; pointer-events: none;
   transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); animation: none;
 }
+.glow-btn:disabled { opacity: 0.6; pointer-events: none; }
 @keyframes btnBob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+
+/* ---------- Tap-hint hand beside the main buttons ----------
+   Add class="tap" to any button to give it the pointing hand.
+   It sits at the bottom-right corner so it never overflows the
+   screen on mobile, and it vanishes together with the button. */
+.tap::after {
+  content: '\1F446';
+  position: absolute; right: -4px; bottom: -32px;
+  font-size: 1.9rem; line-height: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 3px rgba(91, 38, 80, 0.3));
+  animation: tapHint 1.1s ease-in-out infinite;
+}
+.tap:disabled::after { display: none; }
+@keyframes tapHint {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  45% { transform: translate(-6px, -12px) scale(0.9); }
+  60% { transform: translate(-6px, -12px) scale(0.82); }
+}
 
 /* ---------- Cartoon characters ---------- */
 .mascot {
@@ -546,8 +564,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   filter: drop-shadow(0 8px 0 rgba(91, 38, 80, 0.14));
 }
 
-/* Wish prompt + BLOW ME fold away smoothly after the candle is blown.
-   (grid 1fr → 0fr animates to the content's real height, whatever it is) */
+/* Wish prompt + BLOW ME fold away smoothly after the candle is blown. */
 .wish-block {
   display: grid; grid-template-rows: 1fr; width: 100%; justify-items: center;
   transition: grid-template-rows 0.8s var(--ease), opacity 0.5s var(--ease), transform 0.6s var(--ease), margin 0.8s var(--ease);
@@ -564,6 +581,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .wish-text { font-size: clamp(1rem, 3vw, 1.15rem); max-width: 480px; }
 .wish-text strong { font-family: 'Pacifico', cursive; font-weight: 400; font-size: 1.55em; line-height: 1.3; color: var(--pink-600); display: block; margin-bottom: 4px; }
 
+/* The wish block clips its content while folding; keep the hand visible before that */
+.wish-block:not(.gone) .wish-inner { overflow: visible; }
+
 /* ============================================================
    SCREEN 5 — PARTY
    ============================================================ */
@@ -575,7 +595,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   animation: partyPulse 1.6s ease-in-out infinite;
 }
 @keyframes partyPulse { 0%, 100% { transform: scale(1) rotate(-1deg); } 50% { transform: scale(1.06) rotate(1deg); } }
-.party-buttons { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+.party-buttons { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; padding-bottom: 28px; }
 .yes-btn { font-size: 1.3rem; padding: 16px 46px; }
 .no-btn {
   font-size: 1.1rem; padding: 14px 34px;
@@ -598,6 +618,33 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .no-popup.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
 /* ============================================================
+   SCREEN 5b — WHEN & WHERE (reply box)
+   ============================================================ */
+.reply-card {
+  width: 100%; max-width: 520px;
+  display: flex; flex-direction: column; gap: 12px; text-align: left;
+  padding: 20px 22px;
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border: 3px solid #fff; border-radius: 28px; box-shadow: var(--bubble-shadow);
+}
+.reply-label {
+  font-family: 'Pacifico', cursive; font-weight: 400;
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  color: var(--pink-600); line-height: 1.3;
+}
+#reply-text {
+  width: 100%; resize: none; padding: 14px 16px;
+  font: inherit; font-size: 1.05rem; color: var(--ink);
+  background: #fff; border: 3px solid var(--pink-300); border-radius: 20px; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#reply-text::placeholder { color: var(--ink-soft); opacity: 0.6; }
+#reply-text:focus { border-color: var(--pink-500); box-shadow: 0 0 0 4px rgba(255, 90, 165, 0.2); }
+.reply-error { color: var(--pink-700); font-size: 0.95rem; }
+#send-btn { margin-bottom: 28px; }
+
+/* ============================================================
    SCREEN 6 — THANK YOU
    ============================================================ */
 .thanks-title {
@@ -613,6 +660,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .email-status.ok { border: 3px solid #6fd68a; color: #23803d; }
 .email-status.err { border: 3px solid var(--pink-400); color: var(--pink-700); }
+#restart-btn { margin-bottom: 28px; }
 
 /* ============================================================
    Responsive
@@ -629,6 +677,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .party-buttons { gap: 16px; }
   .yes-btn { font-size: 1.1rem; padding: 14px 38px; }
   .greeting, .wish-message, .thanks-message, .wish-text { padding: 14px 18px; }
+  .reply-card { padding: 16px 16px; }
 }
 @media (min-width: 1024px) {
   .stage { --gap: 30px; }
